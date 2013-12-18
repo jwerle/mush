@@ -55,20 +55,12 @@ mush () {
             ## guarded by the values of
             ## `LEFT_DELIM' and `RIGHT_DELIM'
             ## with the value of the variable
-            while IFS="=" read -ra part; do
-              ((++i))
-              key="${part[0]}"
-              val="${part[1]}"
-              line="${line//${LEFT_DELIM}$key${RIGHT_DELIM}/$val}"
-
-              if [ "2" = "$i" ]; then
-                break;
-              fi
-            done <<< "$var";
-
+            IFS="="; read -ra part <<< "$var";
+            key="${part[0]}"
+            val="${part[1]}"
+            line="${line//${LEFT_DELIM}$key${RIGHT_DELIM}/$val}"
+            unset IFS
           done
-
-          #line="${line//${LEFT_DELIM}*${RIGHT_DELIM}/}"
 
           ## output to stdout
           echo "$line" | sed -e "s#${LEFT_DELIM}[A-Za-z]*${RIGHT_DELIM}##g"
