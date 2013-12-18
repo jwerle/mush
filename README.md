@@ -70,7 +70,7 @@ $ cat index.html.ms | \
   title="Awesome Web Site" \
   main_css="/css/main.css" \
   main_js="/js/main.js" \
-  content="`cat page.html.ms | name="home" mush`" \
+  content="`cat page.html.ms | name=home mush`" \
   mush
 ```
 
