@@ -1,0 +1,50 @@
+.\" Generated with Ronnjs 0.3.8
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "MUSH" "1" "December 2013" "" ""
+.
+.SH "NAME"
+\fBmush\fR \-\- Mustache templates for bash
+.
+.SH "SYNOPSIS"
+\fBmush\fR [\-hvV] [\-f <file>] [\-o <file>]
+.
+.SH "OPTIONS"
+  \fB\-f, \-\-file <file>\fR       file to parse
+  \fB\-o, \-\-out <file>\fR        output file
+  \fB\-h, \-\-help\fR              display this message
+  \fB\-v, \-\-verbose\fR           show verbose output
+  \fB\-V, \-\-version\fR           output version
+.
+.SH "USAGE"
+  $ cat file\.ms | FOO=BAR mush
+  $ VALUE=123 mush \-f file\.ms \-o file
+  $ echo "Today\'s date is {DATE}" | DATE=12/17/13 mush
+  $ cat \./template\.ms | VAR=VALUE mush
+.
+.SH "AUTHOR"
+.
+.IP "\(bu" 4
+Joseph Werle \fIjoseph\.werle@gmail\.com\fR
+.
+.IP "" 0
+.
+.SH "REPORTING BUGS"
+.
+.IP "\(bu" 4
+https://github\.com/jwerle/mush/issues
+.
+.IP "" 0
+.
+.SH "SEE ALSO"
+.
+.IP "\(bu" 4
+http://mustache\.github\.io/
+.
+.IP "\(bu" 4
+https://github\.com/jwerle/mush
+.
+.IP "" 0
+.
+.SH "LICENSE"
+  MIT (C) Copyright Joseph Werle 2013
