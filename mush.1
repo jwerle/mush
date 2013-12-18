@@ -7,21 +7,98 @@
 \fBmush\fR \-\- Mustache templates for bash
 .
 .SH "SYNOPSIS"
-\fBmush\fR [\-hV] [\-f <file>] [\-o <file>]
+\fBmush\fR [\-ehV] [\-f <file>] [\-o <file>]
 .
 .SH "OPTIONS"
   \fB\-f, \-\-file <file>\fR       file to parse
   \fB\-o, \-\-out <file>\fR        output file
+  \fB\-e, \-\-escape\fR            escapes html html entities
   \fB\-h, \-\-help\fR              display this message
   \fB\-V, \-\-version\fR           output version
 .
-.SH "USAGE"
+.SH "EXAMPLES"
   $ cat file\.ms | FOO=BAR mush
   $ VALUE=123 mush \-f file\.ms \-o file
   $ echo "Today\'s date is {{DATE}}" | DATE=`date +%D` mush
   $ cat \./template\.ms | VAR=VALUE mush
 .
-.SH "AUTHOR"
+.SH "USAGE"
+  Suppose you have a template file:
+.
+.P
+  \fB*\./template\.ms\fR*
+.
+.P
+  \fB
+  VAR={{VAR}}
+  \fR
+.
+.P
+  You can compile it like such: 
+.
+.P
+  \fBsh
+  $ cat \./template\.ms | VAR=VALUE mush
+  VAR=123
+  \fR
+.
+.P
+  You can utilize stdin in the same way with \fBecho\fR
+.
+.P
+  \fBsh
+  echo "Today\'s date is {{DATE}}" | DATE=`date +%D` mush
+  Today\'s date is 12/17/13
+  \fR
+.
+.P
+  Variables are passed to the view vie environment variable
+  definition\. Due to the way variables are scoped to the
+  templates\. All environment variables are available to the
+  template\. This includes variables like \fB$HOME\fR and \fB$USER\fR
+.
+.P
+  Compile a HTML file with partial:
+.
+.P
+  \fB*index\.html\.ms\fR* (layout)
+.
+.P
+  \fBhtml
+  <!doctype html>
+  <html>
+    <head>
+      <meta http\-equiv="content\-type" content="text/html; charset=utf\-8"/>
+      <title>{{title}}</title>
+      <link rel="stylesheet" href="{{main_css}}" type="text/css" />
+      <script type="text/javascript" src="{{main_js}}" charset="utf\-8"></script>
+    </head>
+    <body>
+      <div id="app">
+        {{content}}
+      </div>
+    </body>
+  </html>
+  \fR
+.
+.P
+  \fB*page\.html\.ms\fR* (partial)
+.
+.P
+  \fBhtml
+  <div id="{{name}}" class="page"> This is the {{name}} page </div>
+  \fR
+.
+.P
+  \fBsh
+  $ cat index\.html\.ms | \\
+    title="Awesome Web Site" \\
+    main_css="/css/main\.css" \\
+    main_js="/js/main\.js" \\
+    content="`cat page\.html\.ms | name="home" mush`" \\
+    mush
+    \fR
+## AUTHOR
 .
 .IP "\(bu" 4
 Joseph Werle \fIjoseph\.werle@gmail\.com\fR
