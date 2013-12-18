@@ -24,7 +24,7 @@ mush(1) -- Mustache templates for bash
 
   Suppose you have a template file:
 
-  ***./template.ms***
+  ./template.ms
 
   ```
   VAR={{VAR}}
@@ -32,15 +32,15 @@ mush(1) -- Mustache templates for bash
 
   You can compile it like such: 
 
-  ```sh
+  ```
   $ cat ./template.ms | VAR=VALUE mush
   VAR=123
   ```
 
   You can utilize stdin in the same way with `echo`
 
-  ```sh
-  echo "Today's date is {{DATE}}" | DATE=`date +%D` mush
+  ```
+  $ echo "Today's date is {{DATE}}" | DATE=`date +%D` mush
   Today's date is 12/17/13
   ```
 
@@ -51,9 +51,9 @@ mush(1) -- Mustache templates for bash
 
   Compile a HTML file with partial:
 
-  ***index.html.ms*** (layout)
+ index.html.ms (layout)
 
-  ```html
+  ```
   <!doctype html>
   <html>
     <head>
@@ -70,20 +70,21 @@ mush(1) -- Mustache templates for bash
   </html>
   ```
 
-  ***page.html.ms*** (partial)
+  page.html.ms (partial)
 
-  ```html
+  ```
   <div id="{{name}}" class="page"> This is the {{name}} page </div>
   ```
 
-  ```sh
+  ```
   $ cat index.html.ms | \
     title="Awesome Web Site" \
     main_css="/css/main.css" \
     main_js="/js/main.js" \
     content="`cat page.html.ms | name="home" mush`" \
     mush
-    ```
+  ```
+
 ## AUTHOR
 
   - Joseph Werle <joseph.werle@gmail.com>
