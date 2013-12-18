@@ -7,7 +7,7 @@ all:
 	@:
 
 install:
-	install $(BIN).sh $(PREFIX)/bin
+	cp $(BIN).sh $(PREFIX)/bin/$(BIN)
 	install $(BIN).1 $(MANPREFIX)
 
 uninstall:
