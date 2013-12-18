@@ -11,7 +11,7 @@ $ make install
 
 ## usage
 
-***./template.ms***
+*./template.ms*
 
 ```
 VAR={VAR}
@@ -25,7 +25,7 @@ VAR=123
 You can utilize stdin in the same way with `echo`
 
 ```sh
-echo "Today's date is {DATE}" | DATE=`date +%D` mush
+$ echo "Today's date is {DATE}" | DATE=`date +%D` mush
 Today's date is 12/17/13
 ```
 
