@@ -29,7 +29,7 @@ usage () {
     echo "examples:"
     echo "  $ cat file.ms | FOO=BAR mush"
     echo "  $ VALUE=123 mush -f file.ms -o file"
-    echo "  $ echo \"Today's date is {DATE}\" | DATE=`date +%D` mush"
+    echo "  $ echo \"Today's date is {DATE}\" | DATE=\`date +%D\` mush"
     echo "  $ cat ./template.ms | VAR=VALUE mush"
     echo
     echo "options:"
