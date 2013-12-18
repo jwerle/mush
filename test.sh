@@ -26,30 +26,7 @@ cat "$FILE" | $BIN | while read line; do
   echo " $i $line"
   case $i in
     1)
-      expected="$USER is $GENDER"
-
-      if [ "$line" != "$expected" ]; then
-        throw "$i '$line' != '$expected'"
-      fi
-      ;;
-
-    2)
-      expected="$THING is $COLOR"
-
-      if [ "$line" != "$expected" ]; then
-        throw "$i '$line' != '$expected'"
-      fi
-      ;;
-
-    3)
-      expected="$PERSON is $ADJECTIVE"
-
-      if [ "$line" != "$expected" ]; then
-        throw "$i '$line' != '$expected'"
-      fi
-      ;;
-
-    4)
+      # {{! this is a comment }}
       expected=""
 
       if [ "$line" != "$expected" ]; then
@@ -57,7 +34,55 @@ cat "$FILE" | $BIN | while read line; do
       fi
       ;;
 
+    2)
+      expected=""
+
+      if [ "$line" != "$expected" ]; then
+        throw "$i '$line' != '$expected'"
+      fi
+      ;;
+
+    3)
+      expected="$USER is $GENDER"
+
+      if [ "$line" != "$expected" ]; then
+        throw "$i '$line' != '$expected'"
+      fi
+      ;;
+
+    4)
+      expected="$THING is $COLOR"
+
+      if [ "$line" != "$expected" ]; then
+        throw "$i '$line' != '$expected'"
+      fi
+      ;;
+
     5)
+      expected="$PERSON is $ADJECTIVE"
+
+      if [ "$line" != "$expected" ]; then
+        throw "$i '$line' != '$expected'"
+      fi
+      ;;
+
+    6)
+      expected="$USER is friends with $PERSON"
+
+      if [ "$line" != "$expected" ]; then
+        throw "$i '$line' != '$expected'"
+      fi
+      ;;
+
+    7)
+      expected=""
+
+      if [ "$line" != "$expected" ]; then
+        throw "$i '$line' != '$expected'"
+      fi
+      ;;
+
+    8)
       expected=""
 
       if [ "$line" != "$expected" ]; then
