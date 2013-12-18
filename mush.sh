@@ -9,7 +9,7 @@ STDERR=2
 LEFT_DELIM="{"
 RIGHT_DELIM="}"
 ENV="`env`"
-out="| cat"
+out=">&$STDOUT"
 
 if [ -t 0 ]; then
   ISATTY=1
@@ -47,8 +47,6 @@ mush () {
         ## read each ENV variable
         echo "$ENV" | {
           while read var; do
-            i=0
-
             ## split each ENV variable by '='
             ## and parse the line replacing
             ## occurrence of the key with
@@ -99,7 +97,9 @@ while true; do
       exit 0
       ;;
     *)
-      error "unknown option \`$arg'"
+      {
+        echo "unknown option \`$arg'"
+      } >&$STDERR
       usage
       exit 1
       ;;
@@ -108,7 +108,7 @@ done
 
 if [ "0" = "$ISATTY" ]; then
   eval "mush $out"
-elif [ "0" != "$file" ]; then
+elif [ ! -z "$file" ]; then
   eval "cat $file | mush $out"
 else
   usage
