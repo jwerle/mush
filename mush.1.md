@@ -16,7 +16,7 @@ mush(1) -- Mustache templates for bash
   
   $ cat file.ms | FOO=BAR mush
   $ VALUE=123 mush -f file.ms -o file
-  $ echo "Today's date is {DATE}" | DATE=`date +%D` mush
+  $ echo "Today's date is {DATE}" | DATE=\`date +%D\` mush
   $ cat ./template.ms | VAR=VALUE mush
 
 ## AUTHOR
