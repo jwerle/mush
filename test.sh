@@ -1,11 +1,14 @@
 #!/bin/sh
 
 BIN="./mush.sh"
+FILE="./test/tpl.ms"
+i=0
 
 throw () {
   {
-    printf "error: %s\n" "$@"
+    printf " \n error: \`%s'\n" "$@"
   } >&2
+  exit 1
 }
 
 export USER="jwerle"
@@ -15,10 +18,12 @@ export COLOR="red"
 export PERSON="tobi"
 export ADJECTIVE="cool"
 
-i=0
-cat ./test/tpl.ms | $BIN | while read line; do
+echo
+echo " $FILE"
+cat "$FILE" | $BIN | while read line; do
   ((++i))
 
+  echo " $i $line"
   case $i in
     1)
       expected="$USER is $GENDER"
@@ -36,7 +41,6 @@ cat ./test/tpl.ms | $BIN | while read line; do
       fi
       ;;
 
-
     3)
       expected="$PERSON is $ADJECTIVE"
 
@@ -44,7 +48,6 @@ cat ./test/tpl.ms | $BIN | while read line; do
         throw "$i '$line' != '$expected'"
       fi
       ;;
-
 
     4)
       expected=""
@@ -64,4 +67,11 @@ cat ./test/tpl.ms | $BIN | while read line; do
   esac
 done
 
-echo "ok!"
+echo
+
+if [ $? -eq 0 ]; then
+  echo "+ ok!"
+else
+  echo "x fail"
+fi
+exit $?

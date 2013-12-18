@@ -3,14 +3,13 @@ mush(1) -- Mustache templates for bash
 
 ## SYNOPSIS
 
-`mush` [-hvV] [-f <file>] [-o <file>]
+`mush` [-hV] [-f <file>] [-o <file>]
 
 ## OPTIONS
 
   `-f, --file <file>`       file to parse
   `-o, --out <file>`        output file
   `-h, --help`              display this message
-  `-v, --verbose`           show verbose output
   `-V, --version`           output version
 
 ## USAGE

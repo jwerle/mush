@@ -2,9 +2,6 @@
 
 SELF="$0"
 VERSION="0.0.1"
-VERBOSE=0
-CLEAN=0
-TEST=0
 NULL=/dev/null
 STDIN=0
 STDOUT=1
@@ -12,13 +9,7 @@ STDERR=2
 LEFT_DELIM="{"
 RIGHT_DELIM="}"
 ENV="`env`"
-
 out="| cat"
-dir="`pwd`"
-deps="deps"
-argv=${@}
-argc="${#}"
-
 
 if [ -t 0 ]; then
   ISATTY=1
@@ -30,39 +21,8 @@ version () {
   echo $VERSION
 }
 
-fprintf () {
-  {
-    printf "${@:2}"
-  } >&$1
-}
-
-verbose () {
-  if [ "1" -eq "$VERBOSE" ]
-  then
-    printf "verbose: %s\n" "$@"
-  fi
-}
-
-info () {
-  printf "   %s\n" "$@"
-}
-
-warn () {
-  printf "warn: %s\n" "$@"
-}
-
-error () {
-  fprintf $STDERR "$@"
-  fprintf $STDERR "\n"
-}
-
-throw () {
-  error "$@"
-  exit 1
-}
-
 usage () {
-  echo "usage: mush [-hvV] [-f <file>] [-o <file>]"
+  echo "usage: mush [-hV] [-f <file>] [-o <file>]"
 
   if [ "$1" = "1" ]; then
     echo
@@ -76,7 +36,6 @@ usage () {
     echo "  -f, --file <file>       file to parse"
     echo "  -o, --out <file>        output file"
     echo "  -h, --help              display this message"
-    echo "  -v, --verbose           show verbose output"
     echo "  -V, --version           output version"
   fi
 }
@@ -112,7 +71,7 @@ mush () {
           #line="${line//${LEFT_DELIM}*${RIGHT_DELIM}/}"
 
           ## output to stdout
-          echo "$line" | sed -e "s#{[A-Za-z]*}##g"
+          echo "$line" | sed -e "s#${LEFT_DELIM}[A-Za-z]*${RIGHT_DELIM}##g"
         }
     };
   done
@@ -131,10 +90,6 @@ while true; do
   fi
 
   case $arg in
-    -v|--verbose)
-      VERBOSE=1;
-      shift;
-      ;;
     -f|--file)
       file="$2";
       shift 2;

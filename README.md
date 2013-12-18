@@ -11,7 +11,7 @@ $ make install
 
 ## usage
 
-*./template.ms*
+***./template.ms***
 
 ```
 VAR={VAR}
@@ -25,14 +25,14 @@ VAR=123
 You can utilize stdin in the same way with `echo`
 
 ```sh
-$ echo "Today's date is {DATE}" | DATE=`date +%D` mush
+echo "Today's date is {DATE}" | DATE=`date +%D` mush
 Today's date is 12/17/13
 ```
 
 ## api
 
 ```
-usage: mush [-hvV] [-f <file>] [-o <file>]
+usage: mush [-hV] [-f <file>] [-o <file>]
 
 examples:
   $ cat file.ms | FOO=BAR mush
@@ -44,7 +44,6 @@ options:
   -f, --file <file>       file to parse
   -o, --out <file>        output file
   -h, --help              display this message
-  -v, --verbose           show verbose output
   -V, --version           output version
 ```
 
