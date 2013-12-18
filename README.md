@@ -74,6 +74,25 @@ $ cat index.html.ms | \
   mush
 ```
 
+This will yield:
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>foo</title>
+    <link rel="stylesheet" href="/css/main.css" type="text/css" />
+    <script type="text/javascript" src="/js/app.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div id="home" class="page"> This is the home page </div>
+    </div>
+  </body>
+</html>
+```
+
 ## api
 
 ```
