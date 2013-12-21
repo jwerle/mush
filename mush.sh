@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 SELF="$0"
 VERSION="0.0.1"

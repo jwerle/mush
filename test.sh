@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 BIN="./mush.sh"
 FILE="./test/tpl.ms"
