@@ -1,29 +1,10 @@
 #!/bin/bash
 
-SELF="$0"
-VERSION="0.0.2"
-NULL=/dev/null
-STDIN=0
-STDOUT=1
-STDERR=2
-LEFT_DELIM="{{"
-RIGHT_DELIM="}}"
-INDENT_LEVEL="  "
-ESCAPE=0
-ENV="`env`"
-out=">&$STDOUT"
-
-if [ -t 0 ]; then
-  ISATTY=1
-else
-  ISATTY=0
-fi
-
-version () {
-  echo $VERSION
+mush_version () {
+  echo "0.0.2"
 }
 
-usage () {
+mush_usage () {
   echo "usage: mush [-ehV] [-f <file>] [-o <file>]"
 
   if [ "$1" = "1" ]; then
@@ -44,6 +25,17 @@ usage () {
 }
 
 mush () {
+  local SELF="$0"
+  local NULL=/dev/null
+  local STDIN=0
+  local STDOUT=1
+  local STDERR=2
+  local LEFT_DELIM="{{"
+  local RIGHT_DELIM="}}"
+  local INDENT_LEVEL="  "
+  local ESCAPE=0
+  local ENV="`env`"
+  local out=">&$STDOUT"
   ## read each line
   while IFS= read line; do
     echo "${line/$'\n'/}" | {
@@ -118,32 +110,32 @@ while true; do
       shift
       ;;
     -h|--help)
-      usage 1
+      mush_usage 1
       exit 1
       ;;
     -V|--version)
-      version
+      mush_version
       exit 0
       ;;
     *)
       {
         echo "unknown option \`$arg'"
       } >&$STDERR
-      usage
+      mush_usage
       exit 1
       ;;
   esac
 done
 
 if [[ ${BASH_SOURCE[0]} != $0 ]]; then
-  export -f bpkg
+  export -f mush
 else
-  if [ "0" = "$ISATTY" ]; then
+  if [ ! -t 0 ]; then
     eval "mush $out"
   elif [ ! -z "$file" ]; then
     eval "cat $file | mush $out"
   else
-    usage
+    mush_usage
     exit 1
   fi
   exit $?
