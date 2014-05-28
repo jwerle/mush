@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mush_version () {
-  echo "0.0.2"
+  echo "0.0.3"
 }
 
 mush_usage () {
@@ -36,6 +36,51 @@ mush () {
   local ESCAPE=0
   local ENV="`env`"
   local out=">&$STDOUT"
+
+  ## parse opts
+  while true; do
+    arg="$1"
+
+    if [ "" = "$1" ]; then
+      break;
+    fi
+
+    if [ "${arg:0:1}" != "-" ]; then
+      shift
+      continue
+    fi
+
+    case $arg in
+      -f|--file)
+        file="$2";
+        shift 2;
+        ;;
+      -o|--out)
+        out="> $2";
+        shift 2;
+        ;;
+      -e|--escape)
+        ESCAPE=1
+        shift
+        ;;
+      -h|--help)
+        mush_usage 1
+        exit 1
+        ;;
+      -V|--version)
+        mush_version
+        exit 0
+        ;;
+      *)
+        {
+          echo "unknown option \`$arg'"
+        } >&$STDERR
+        mush_usage
+        exit 1
+        ;;
+    esac
+  done
+
   ## read each line
   while IFS= read line; do
     echo "${line/$'\n'/}" | {
@@ -84,48 +129,6 @@ mush () {
   done
 }
 
-while true; do
-  arg="$1"
-
-  if [ "" = "$1" ]; then
-    break;
-  fi
-
-  if [ "${arg:0:1}" != "-" ]; then
-    shift
-    continue
-  fi
-
-  case $arg in
-    -f|--file)
-      file="$2";
-      shift 2;
-      ;;
-    -o|--out)
-      out="> $2";
-      shift 2;
-      ;;
-    -e|--escape)
-      ESCAPE=1
-      shift
-      ;;
-    -h|--help)
-      mush_usage 1
-      exit 1
-      ;;
-    -V|--version)
-      mush_version
-      exit 0
-      ;;
-    *)
-      {
-        echo "unknown option \`$arg'"
-      } >&$STDERR
-      mush_usage
-      exit 1
-      ;;
-  esac
-done
 
 if [[ ${BASH_SOURCE[0]} != $0 ]]; then
   export -f mush
