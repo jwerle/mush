@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SELF="$0"
-VERSION="0.0.1"
+VERSION="0.0.2"
 NULL=/dev/null
 STDIN=0
 STDOUT=1
@@ -135,13 +135,17 @@ while true; do
   esac
 done
 
-if [ "0" = "$ISATTY" ]; then
-  eval "mush $out"
-elif [ ! -z "$file" ]; then
-  eval "cat $file | mush $out"
+if [[ ${BASH_SOURCE[0]} != $0 ]]; then
+  export -f bpkg
 else
-  usage
-  exit 1
+  if [ "0" = "$ISATTY" ]; then
+    eval "mush $out"
+  elif [ ! -z "$file" ]; then
+    eval "cat $file | mush $out"
+  else
+    usage
+    exit 1
+  fi
+  exit $?
 fi
 
-exit $?
