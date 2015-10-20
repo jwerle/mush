@@ -33,7 +33,7 @@ echo "Today's date is {{DATE}}" | DATE=`date +%D` mush
 Today's date is 12/17/13
 ```
 
-Variables are passed to the view vie environment variable
+Variables are passed to the view environment variable
 definition. Due to the way variables are scoped to the
 templates. All environment variables are available to the
 template. This includes variables like `$HOME` and `$USER`
