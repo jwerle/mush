@@ -20,7 +20,7 @@ export ADJECTIVE="cool"
 
 echo
 echo " $FILE"
-cat "$FILE" | $BIN | while read line; do
+cat "$FILE" | $BIN | while read -r line; do
   ((++i))
 
   echo " $i $line"
@@ -75,7 +75,7 @@ cat "$FILE" | $BIN | while read line; do
       ;;
 
     7)
-      expected=""
+      expected=''
 
       if [ "$line" != "$expected" ]; then
         throw "$i '$line' != '$expected'"
@@ -83,12 +83,21 @@ cat "$FILE" | $BIN | while read line; do
       ;;
 
     8)
-      expected=""
+      expected="has \w backslashes"
 
       if [ "$line" != "$expected" ]; then
         throw "$i '$line' != '$expected'"
       fi
       ;;
+
+    9)
+      expected=''
+
+      if [ "$line" != "$expected" ]; then
+        throw "$i '$line' != '$expected'"
+      fi
+      ;;
+
   esac
 done
 
