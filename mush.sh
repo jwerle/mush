@@ -82,8 +82,8 @@ mush () {
   done
 
   ## read each line
-  while IFS= read line; do
-    echo "${line/$'\n'/}" | {
+  while IFS= read -r line; do
+    printf '%q\n' "${line}" | {
         ## read each ENV variable
         echo "$ENV" | {
           while read var; do
