@@ -5,6 +5,14 @@ Mustache templates for bash
 
 ## install
 
+With [bpkg](https://github.com/bpkg/bpkg):
+
+```sh
+$ bpkg install jwerle/mush
+```
+
+From source:
+
 ```sh
 $ make install
 ```
