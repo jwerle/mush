@@ -8,7 +8,7 @@ Mustache templates for bash
 With [bpkg](https://github.com/bpkg/bpkg):
 
 ```sh
-$ bpkg install jwerle/mush
+$ bpkg install -g jwerle/mush
 ```
 
 From source:
