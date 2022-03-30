@@ -10,8 +10,10 @@ jobs:
       - uses: pipeline-components/shellcheck@v0.10.0
         with:
           directory: mush.sh test.sh
-      - name: Lint & Tests
+      - name: Tests
         shell: bash
         run: |
           curl -Lso- get.bpkg.sh | bash
+          mush.sh --help ## verify it runs and exits with 0
+          mush.sh --version ## verify it runs and exits with 0
           bpkg run test
