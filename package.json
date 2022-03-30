@@ -1,7 +1,0 @@
-{
-  "name": "mush",
-  "version": "0.0.3",
-  "description": "Mustache templates for bash",
-  "scripts": [ "mush.sh" ],
-  "install": "make install"
-}
