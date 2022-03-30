@@ -8,8 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: pipeline-components/shellcheck@v0.10.0
-        with:
-          directory: *.sh
       - name: Lint & Tests
         shell: bash
         run: |
