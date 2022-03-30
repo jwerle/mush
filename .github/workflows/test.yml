@@ -1,0 +1,14 @@
+on:
+  - push
+  - pull_request
+
+jobs:
+  must_pass:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: pipeline-components/shellcheck@v0.10.0
+      script:
+        curl -Lso- get.bpkg.sh | bash
+        bpkg run lint
+        bpkg run test

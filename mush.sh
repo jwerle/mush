@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 mush_version () {
-  echo "0.0.3"
+  echo "0.1.0"
 }
 
 mush_usage () {
@@ -25,17 +25,23 @@ mush_usage () {
 }
 
 mush () {
+  # shellcheck disable=SC2034
   local SELF="$0"
+  # shellcheck disable=SC2034
   local NULL=/dev/null
+  # shellcheck disable=SC2034
   local STDIN=0
   local STDOUT=1
   local STDERR=2
   local LEFT_DELIM="{{"
   local RIGHT_DELIM="}}"
+  # shellcheck disable=SC2034
   local INDENT_LEVEL="  "
   local ESCAPE=0
-  local ENV="`env`"
+  local ENV=""
   local out=">&$STDOUT"
+
+  ENV="$(env)"
 
   ## parse opts
   while true; do
@@ -86,7 +92,7 @@ mush () {
     printf '%q\n' "${line}" | {
         ## read each ENV variable
         echo "$ENV" | {
-          while read var; do
+          while read -r var; do
             ## split each ENV variable by '='
             ## and parse the line replacing
             ## occurrence of the key with
@@ -130,12 +136,12 @@ mush () {
 }
 
 
-if [[ ${BASH_SOURCE[0]} != $0 ]]; then
+if [[ "${BASH_SOURCE[0]}" != "$0" ]]; then
   export -f mush
 else
   if [ ! -t 0 ]; then
     eval "mush $out"
-  elif [ ! -z "$file" ]; then
+  elif [ -n "$file" ]; then
     eval "cat $file | mush $out"
   else
     mush_usage

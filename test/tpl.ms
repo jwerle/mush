@@ -1,6 +1,6 @@
 {{! this is a comment }}
 
-{{USER}} is {{GENDER}}
+{{USER}} is {{PRONOUNS}}
 {{THING}} is {{COLOR}}
 {{PERSON}} is {{ADJECTIVE}}
 {{USER}} is friends with {{PERSON}}

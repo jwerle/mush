@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 BIN="./mush.sh"
 FILE="./test/tpl.ms"
@@ -12,7 +12,7 @@ throw () {
 }
 
 export USER="jwerle"
-export GENDER="male"
+export PRONOUNS="he/him"
 export THING="apple"
 export COLOR="red"
 export PERSON="tobi"
@@ -20,7 +20,7 @@ export ADJECTIVE="cool"
 
 echo
 echo " $FILE"
-cat "$FILE" | $BIN | while read -r line; do
+cat < "$FILE" | $BIN | while read -r line; do
   ((++i))
 
   echo " $i $line"
@@ -43,7 +43,7 @@ cat "$FILE" | $BIN | while read -r line; do
       ;;
 
     3)
-      expected="$USER is $GENDER"
+      expected="$USER is $PRONOUNS"
 
       if [ "$line" != "$expected" ]; then
         throw "$i '$line' != '$expected'"
@@ -101,11 +101,14 @@ cat "$FILE" | $BIN | while read -r line; do
   esac
 done
 
-echo
 
-if [ $? -eq 0 ]; then
+# shellcheck disable=SC2181
+if (( $? == 0 )); then
+  echo
   echo "+ ok!"
 else
+  echo
   echo "x fail"
+  exit 1
 fi
 exit $?
