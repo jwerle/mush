@@ -8,7 +8,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: pipeline-components/shellcheck@v0.10.0
-      script:
-        curl -Lso- get.bpkg.sh | bash
-        bpkg run lint
-        bpkg run test
+      - name: Lint & Tests
+        shell: bash
+        run: |
+          curl -Lso- get.bpkg.sh | bash
+          bpkg run lint
+          bpkg run test
