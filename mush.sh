@@ -143,6 +143,8 @@ else
     eval "mush $out"
   elif [ -n "$file" ]; then
     eval "cat $file | mush $out"
+  elif (( $# > 0 )); then
+    mush "$@"
   else
     mush_usage
     exit 1
