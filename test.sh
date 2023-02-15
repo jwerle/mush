@@ -111,4 +111,3 @@ else
   echo "x fail"
   exit 1
 fi
-exit $?

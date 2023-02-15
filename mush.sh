@@ -128,7 +128,7 @@ mush () {
             ## parse comments
             sed -e "s#${LEFT_DELIM}\!.*${RIGHT_DELIM}##g" | \
             ## escaping
-            sed -e 's/\\\"/""/g'
+            sed -e 's/\\\"/"/g'
           };
         }
     };
