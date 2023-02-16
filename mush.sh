@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 mush_version () {
-  echo "0.1.0"
+  echo "0.1.4"
 }
 
 mush_usage () {
