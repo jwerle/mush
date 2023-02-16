@@ -126,9 +126,7 @@ mush () {
             ## parse undefined variables
             sed -e "s#${LEFT_DELIM}[A-Za-z]*${RIGHT_DELIM}##g" | \
             ## parse comments
-            sed -e "s#${LEFT_DELIM}\!.*${RIGHT_DELIM}##g" | \
-            ## escaping
-            sed -e 's/\\\"/""/g'
+            sed -e "s#${LEFT_DELIM}\!.*${RIGHT_DELIM}##g"
           };
         }
     };
