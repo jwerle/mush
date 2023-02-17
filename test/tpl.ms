@@ -1,4 +1,4 @@
-{{! this is a comment }}
+{{! this is a comment }}END
 
 {{USER}} is {{PRONOUNS}}
 {{THING}} is {{COLOR}}
@@ -6,3 +6,5 @@
 {{USER}} is friends with {{PERSON}}
 {{var}} {{value}}
 has \w backslashes
+Hello \"{{USER}}\"
+Hello "{{USER}}"
