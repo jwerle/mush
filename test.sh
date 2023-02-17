@@ -22,12 +22,17 @@ echo
 echo " $FILE"
 cat < "$FILE" | $BIN | while read -r line; do
   ((++i))
+  if [ "$line" = "" ]
+  then
+	  # ignore empty lines
+	  continue
+  fi
 
   echo " $i $line"
   case $i in
     1)
-      # {{! this is a comment }}
-      expected=""
+      # {{! this is a comment }}END
+      expected="END"
 
       if [ "$line" != "$expected" ]; then
         throw "$i '$line' != '$expected'"
@@ -91,12 +96,24 @@ cat < "$FILE" | $BIN | while read -r line; do
       ;;
 
     9)
-      expected=''
+      expected='Hello \"jwerle\"'
 
       if [ "$line" != "$expected" ]; then
         throw "$i '$line' != '$expected'"
       fi
       ;;
+
+    10)
+      expected='Hello "jwerle"'
+
+      if [ "$line" != "$expected" ]; then
+        throw "$i '$line' != '$expected'"
+      fi
+      ;;
+
+	*)
+		throw "Line not tested : $line"
+		;;
 
   esac
 done
